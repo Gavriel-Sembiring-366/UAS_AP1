@@ -22,19 +22,22 @@ public:
         cin.ignore(); // Ignore the newline character from the previous input
         getline(cin, title);
         vector<string> task;
-        task.push_back(title);
-        tasks.push_back(task);
+        task.push_back(title); //push a tittle to a vector
+        tasks.push_back(task); // push that vector to another vector :)
         showTasks(); // shows all tasks when successfully added
         cout << GREEN_COLOR << "Task added." << RESET_COLOR << endl;
 
         // Ask the user if they want to add an item to the task
-        cout << "Do you want to add an item to this task? (y/n): ";
-        char choice;
-        cin >> choice;
-
-        if (choice == 'y' || choice == 'Y')
+        char choice = 'Y';
+        while (choice == 'Y' || choice == 'y')
         {
-            addItemNum(tasks.size() - 1); // Pass the index of the recently added task
+            cout << "Do you want to add an item to this task? (y/n): ";
+            cin >> choice;
+
+            if (choice == 'y' || choice == 'Y')
+            {
+                addItemNum(tasks.size() - 1); // Pass the index of the recently added task
+            }
         }
     }
 
@@ -49,7 +52,7 @@ public:
         cout << "Enter item: ";
         string item;
         cin.ignore(); // Ignore the newline character from the previous input
-        getline(cin, item);
+        getline(cin, item); // getting the user input and pass it to a variable called item
 
         tasks[taskIndex].push_back(item);
         showTasks(); // shows all tasks when successfully added
@@ -62,7 +65,7 @@ public:
         int taskNumber;
         cin >> taskNumber;
 
-        if (cin.fail())
+        if (cin.fail()) // if user puts string on input calling backup
         {
             invalid_input();
         }
@@ -75,11 +78,11 @@ public:
         {
             tasks[taskNumber - 1].push_back(item);
             showTasks(); // shows all tasks when successfully added
-            cout << GREEN_COLOR << "<<Item added>>" << RESET_COLOR << endl;
+            cout << GREEN_COLOR << "<<Item added>>" << RESET_COLOR << endl; //just a green message
         }
         else
         {
-            cout << RED_COLOR << "<<Invalid task number. Please try again>>" << RESET_COLOR << endl;
+            cout << RED_COLOR << "<<Invalid task number. Please try again>>" << RESET_COLOR << endl; // red message 
         }
     }
 
@@ -107,7 +110,7 @@ public:
             // If there are more than 3 items, display ellipsis
             if (tasks[i].size() - 1 > numItems)
             {
-                cout << "    ..." << endl;
+                cout << "    ..." << endl; //puts ... if the item more than 3 
             }
 
             cout << endl;
@@ -166,8 +169,8 @@ public:
         if (taskNumber >= 1 && taskNumber <= tasks.size())
         {
             tasks[taskNumber - 1][0] += " (Done)";
-            for (size_t i = 1; i < tasks[taskNumber - 1].size(); ++i)
-            {
+            for (size_t i = 1; i < tasks[taskNumber - 1].size(); ++i) //mark task done if task is exist
+            { 
                 tasks[taskNumber - 1][i] += " (Done)";
             }
         }
@@ -187,7 +190,7 @@ public:
         if (taskNumber >= 1 && taskNumber <= tasks.size())
         {
             tasks.erase(tasks.begin() + taskNumber - 1);
-            cout << GREEN_COLOR << "<<Task removed>>" << RESET_COLOR << endl;
+            cout << GREEN_COLOR << "<<Task removed>>" << RESET_COLOR << endl; // remove task if task in the list
         }
         else
         {
@@ -221,7 +224,7 @@ public:
             if (itemNumber >= 1 && itemNumber <= itemCount - 1)
             {
                 tasks[taskNumber - 1].erase(tasks[taskNumber - 1].begin() + itemNumber);
-                cout << GREEN_COLOR << "<<Item removed>>" << RESET_COLOR << endl;
+                cout << GREEN_COLOR << "<<Item removed>>" << RESET_COLOR << endl; //remove item if item is in the vector
             }
             else
             {
@@ -269,7 +272,7 @@ int main()
 
         if (cin.fail())
         {
-            cout << RED_COLOR << "<<Invalid input. Please enter a valid number>>" << RESET_COLOR << endl;
+            cout << RED_COLOR << "<<Invalid input. Please enter a valid choice>>" << RESET_COLOR << endl; //errorrrr
             cin.clear();
             cin.ignore();
             continue;
