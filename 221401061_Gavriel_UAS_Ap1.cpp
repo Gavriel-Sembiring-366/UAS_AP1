@@ -237,11 +237,37 @@ public:
         }
     }
 
+    void specific_shows()
+    {
+        cout << "Enter task number: ";
+        int taskNumber;
+        cin >> taskNumber;
+        taskNumber = taskNumber - 1;
+        if (cin.fail())
+        {
+            invalid_input();
+        }
+
+        if (taskNumber >= 0 && taskNumber < tasks.size())
+        {
+            cout << tasks[taskNumber][0] << " :" << endl;
+
+            for (size_t i = 1; i < tasks[taskNumber].size(); ++i)
+            {
+                cout << "    " << i << ". " << tasks[taskNumber][i] << endl;
+            }
+        }
+        else
+        {
+            cout << RED_COLOR << "<<Invalid task index. Please try again.>>" << RESET_COLOR << endl;
+        }
+    }
+
     void invalid_input()
     {
         cin.clear();
         cin.ignore();
-        cout << RED_COLOR << "<<Invalid input. Please enter a valid number>>" << RESET_COLOR << endl;
+        cout << RED_COLOR << "<<Invalid input. Please enter a valid number>>" << RESET_COLOR << endl;9
     }
 };
 
@@ -258,12 +284,13 @@ int main()
     todoList.showTasks();
     while (true)
     {
-        clearScreen();
+        //clearScreen();
         cout << "'1' to add a task" << endl;
         cout << "'2' to add an item to a task" << endl;
         cout << "'3' to show all tasks" << endl;
         cout << "'4' to mark a task or item as done" << endl;
         cout << "'5' to remove a task or item" << endl;
+        cout << "'6' to show a task" << endl;
         cout << "'0' to exit" << endl;
         cout << "Enter command: ";
 
@@ -275,6 +302,7 @@ int main()
             cout << RED_COLOR << "<<Invalid input. Please enter a valid choice>>" << RESET_COLOR << endl; //errorrrr
             cin.clear();
             cin.ignore();
+            cin.get();
             continue;
         }
 
@@ -297,13 +325,12 @@ int main()
         case 5:
             todoList.removeTask();
             break;
+        case 6:
+            todoList.specific_shows();
+            break;
         default:
-            cout << RED_COLOR << "<<Invalid choice. Please try again>>" << RESET_COLOR << endl;
-            cout << "Press Enter to continue.";
-            cin.get();
+            break;
         }
-        cout << "Press Enter to continue.";
-        cin.get();
     }
     return 0;
 }
